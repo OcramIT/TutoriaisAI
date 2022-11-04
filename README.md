@@ -1,3 +1,3 @@
-<h>Github project para os tutoriais do trabalho "Trabalhos AI"</h>
+<h1>Github project para os tutoriais do trabalho "Trabalhos AI"</h1>
 
-<h1> Marco Mota a44761</h1>
+<h3> Marco Mota a44761</h3>
