@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class ShellMove : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    float speed = 1;
     void Update()
     {
-        
+        this.transform.Translate(0, speed*Time.deltaTime, speed* Time.deltaTime);
     }
 }
