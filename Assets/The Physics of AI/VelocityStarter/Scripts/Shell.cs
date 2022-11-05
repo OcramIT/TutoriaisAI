@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shell : MonoBehaviour
 {
     public GameObject explosion;
+    Rigidbody rb;
     //float mass = 10;
     //float force = 200;
     //float acceleration;
@@ -18,7 +19,7 @@ public class Shell : MonoBehaviour
         if (col.gameObject.tag == "tank")
         {
             GameObject exp = Instantiate(explosion, this.transform.position, Quaternion.identity);
-            Destroy(exp, 0.5f);
+            Destroy(exp, 0.2f);
             Destroy(this.gameObject);
         }
     }
@@ -26,7 +27,7 @@ public class Shell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -38,5 +39,6 @@ public class Shell : MonoBehaviour
         //speedY += gAccel * Time.deltaTime;
         //this.transform.Translate(0, speedY, speedZ);
         //force = 0;
+        this.transform.forward = rb.velocity;
     }
 }
