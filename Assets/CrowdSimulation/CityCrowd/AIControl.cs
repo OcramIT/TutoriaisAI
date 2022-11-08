@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
 
 public class AIControl : MonoBehaviour {
 
     GameObject[] goalLocations;
-    UnityEngine.AI.NavMeshAgent agent;
+    NavMeshAgent agent;
     Animator anim;
 
 
@@ -12,7 +15,7 @@ public class AIControl : MonoBehaviour {
         float sm = Random.Range(0.5f, 2);
 
         goalLocations = GameObject.FindGameObjectsWithTag("goal");
-        agent = this.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent = this.GetComponent<NavMeshAgent>();
         agent.SetDestination(goalLocations[Random.Range(0, goalLocations.Length)].transform.position);
         anim = this.GetComponent<Animator>();
         anim.SetFloat("wOffset", Random.Range(0, 1));
