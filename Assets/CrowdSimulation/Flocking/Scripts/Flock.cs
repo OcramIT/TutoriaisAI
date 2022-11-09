@@ -19,10 +19,19 @@ public class Flock : MonoBehaviour
         // dá set dos limites do manager
         Bounds b = new Bounds(fManager.transform.position, fManager.swimLimits * 2);
 
-        // o peixe vira se sair dos limites
-        if (!b.Contains(transform.position))
+        // o peixe vira se sair dos limites ou se colidir com algo
+        RaycastHit hit=new RaycastHit();
+        Vector3 direction = Vector3.zero;
+
+
+        if (!b.Contains(transform.position)) {
+            turning = true;
+            direction = fManager.transform.position - transform.position;
+        }
+        else if(Physics.Raycast(transform.position, this.transform.forward * 50, out hit))
         {
             turning = true;
+            direction = Vector3.Reflect(this.transform.forward, hit.normal);
         }
         else
         {
@@ -32,7 +41,6 @@ public class Flock : MonoBehaviour
         if (turning)
         {
             // rodar em direção ao centro do manager
-            Vector3 direction = fManager.transform.position - transform.position;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), fManager.rotationSpeed * Time.deltaTime);
 
         }
