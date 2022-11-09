@@ -6,6 +6,8 @@ public class Flock : MonoBehaviour
 {
     public FlockManager fManager;
     float speed;
+    bool turning = false;
+
     void Start()
     {
         speed = Random.Range(fManager.minSpeed, fManager.maxSpeed);
@@ -14,7 +16,35 @@ public class Flock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ApplyRules();
+        // dá set dos limites do manager
+        Bounds b = new Bounds(fManager.transform.position, fManager.swimLimits * 2);
+
+        // o peixe vira se sair dos limites
+        if (!b.Contains(transform.position))
+        {
+            turning = true;
+        }
+        else
+        {
+            turning = false;
+        }
+
+        if (turning)
+        {
+            // rodar em direção ao centro do manager
+            Vector3 direction = fManager.transform.position - transform.position;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), fManager.rotationSpeed * Time.deltaTime);
+
+        }
+        else
+        {
+            if (Random.Range(0, 100) < 10)
+                speed = Random.Range(fManager.minSpeed, fManager.maxSpeed);
+
+            if (Random.Range(0, 100) < 20)
+                ApplyRules();
+        }
+
         transform.Translate(0, 0, Time.deltaTime * speed); 
     }
 
@@ -52,7 +82,7 @@ public class Flock : MonoBehaviour
 
         if (groupSize > 0)
         {
-            vcentre = vcentre / groupSize;
+            vcentre = vcentre / groupSize + (fManager.goalPos - this.transform.position);
             speed = gSpeed / groupSize;
 
             Vector3 direction = (vcentre + vavoid) - transform.position;
