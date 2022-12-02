@@ -5,5 +5,5 @@
 Escolhidos os tutoriais na versão 2019.4
 
 
-<h3>Combinação escolhida: </h3>
+<h3>Combinação escolhida para Parte 2: </h3>
 <h4>   a) Tutoriais 1, 2, 3.</h4>
