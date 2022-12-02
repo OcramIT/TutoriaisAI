@@ -2,4 +2,8 @@
 
 <h3> Marco Mota a44761</h3>
 
-Tutoriais realizados na versão 2019.4
+Escolhidos os tutoriais na versão 2019.4
+
+
+<h3>Combinação escolhida: </h3>
+<h4>   a) Tutoriais 1, 2, 3.</h4>
