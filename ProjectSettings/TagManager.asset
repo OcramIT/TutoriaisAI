@@ -7,6 +7,8 @@ TagManager:
   - goal
   - tank
   - agent
+  - hide
+  - cop
   layers:
   - Default
   - TransparentFX
