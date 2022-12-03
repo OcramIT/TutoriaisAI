@@ -16,9 +16,9 @@ namespace UnityStandardAssets.Utility
 		private float height = 5.0f;
 
 		[SerializeField]
-		private float rotationDamping = 5.0f;
+		private float rotationDamping = 1.0f;
 		[SerializeField]
-		private float heightDamping = 10.0f;
+		private float heightDamping = 1.0f;
 
 		// Use this for initialization
 		void Start() { }
