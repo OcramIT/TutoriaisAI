@@ -133,11 +133,37 @@ namespace AMA
             }
             return false;
         }
+
+        bool TargetCanSeeMe()
+        {
+            Vector3 toAgent = this.transform.position - target.transform.position;
+            float lookingAngle = Vector3.Angle(target.transform.forward, toAgent);
+            if(lookingAngle<60)
+                return true;
+            return false;
+        }
+
+        bool coolDown = false;
+
+        void BehaviourCoolDown()
+        {
+            coolDown = false;
+        }
+
         // Update is called once per frame
         void Update()
         {
-            if (CanSeeTarget())
-                CleverHide();
+            if (!coolDown)
+            {
+                if (CanSeeTarget() && TargetCanSeeMe())
+                {
+                    CleverHide();
+                    coolDown = true;
+                    Invoke("BehaviourCoolDown", 5);
+                }
+                else
+                    Pursue();
+            }
         }
     }
 }
