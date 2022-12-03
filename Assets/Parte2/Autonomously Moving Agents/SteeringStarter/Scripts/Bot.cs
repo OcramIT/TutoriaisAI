@@ -150,12 +150,23 @@ namespace AMA
             coolDown = false;
         }
 
+        bool TargetInRange()
+        {
+            if (Vector3.Distance(this.transform.position, target.transform.position) < 10)
+                return true;
+            return false;
+        }
         // Update is called once per frame
         void Update()
         {
             if (!coolDown)
             {
-                if (CanSeeTarget() && TargetCanSeeMe())
+                if (!TargetCanSeeMe())
+                {
+                    Wander();
+                }
+
+                else if (CanSeeTarget() && TargetCanSeeMe())
                 {
                     CleverHide();
                     coolDown = true;
