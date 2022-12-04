@@ -9,6 +9,10 @@ TagManager:
   - agent
   - hide
   - cop
+  - wp
+  - Checkpoint
+  - Fire
+  - Safe
   layers:
   - Default
   - TransparentFX
