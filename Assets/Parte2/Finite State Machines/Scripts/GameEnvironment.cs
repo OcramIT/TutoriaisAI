@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace FSM
 {
@@ -18,6 +19,7 @@ namespace FSM
                 {
                     instance = new GameEnvironment();
                     instance.Checkpoints.AddRange(GameObject.FindGameObjectsWithTag("Checkpoint"));
+                    instance.checkpoints = instance.checkpoints.OrderBy(waypoint => waypoint.name).ToList();
                 }
                 return instance;
             }
