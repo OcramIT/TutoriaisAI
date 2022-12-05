@@ -17,6 +17,9 @@ namespace BT {
 
         Node.Status treeStatus = Node.Status.RUNNING;
 
+        [Range(0, 1000)]
+        public int money = 800;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -25,6 +28,7 @@ namespace BT {
             tree = new BehaviourTree();
             Sequence steal = new Sequence("Steal Something");
             Leaf goToDiamond = new Leaf("Go To Diamond",GoToDiamond);
+            Leaf hasGotMoney = new Leaf("Has Got Money",HasMoney);
             Leaf goToBackdoor = new Leaf("Go To Backdoor", GoToBackdoor);
             Leaf goToFrontdoor = new Leaf("Go To Front", GoToFrontdoor);
             Leaf goToVan = new Leaf("Go To Van",GoToVan);
@@ -32,8 +36,8 @@ namespace BT {
 
             opendoor.AddChild(goToFrontdoor);
             opendoor.AddChild(goToBackdoor);
-            
 
+            steal.AddChild(hasGotMoney);
             steal.AddChild(opendoor);
             steal.AddChild(goToDiamond);
             //steal.AddChild(goToBackdoor);
@@ -41,6 +45,12 @@ namespace BT {
             tree.AddChild(steal);
 
             tree.PrintTree();
+        }
+        public Node.Status HasMoney()
+        {
+            if (money >= 500)
+                return Node.Status.FAILURE;
+            return Node.Status.SUCCESS;
         }
 
         public Node.Status GoToDiamond()
@@ -55,7 +65,13 @@ namespace BT {
 
         public Node.Status GoToVan()
         {
-            return GoToLocation(van.transform.position);
+            Node.Status s = GoToLocation(van.transform.position);
+            if (s == Node.Status.SUCCESS)
+            {
+                money += 300;
+                diamond.SetActive(false);
+            }
+            return s;
         }
         public Node.Status GoToBackdoor()
         {
@@ -106,7 +122,7 @@ namespace BT {
         // Update is called once per frame
         void Update()
         {
-            if (treeStatus == Node.Status.RUNNING)
+            if (treeStatus != Node.Status.SUCCESS)
                 treeStatus = tree.Process();
         }
     }
