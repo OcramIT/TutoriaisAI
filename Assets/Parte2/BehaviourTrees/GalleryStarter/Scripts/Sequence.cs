@@ -24,7 +24,7 @@ namespace BT
                 return Status.SUCCESS;
             }
 
-            return Status.SUCCESS;
+            return Status.RUNNING;
         }
     }
 }

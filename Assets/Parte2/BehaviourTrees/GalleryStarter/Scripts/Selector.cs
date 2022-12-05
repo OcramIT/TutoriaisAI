@@ -25,10 +25,10 @@ namespace BT
             if (currentChild >= children.Count)
             {
                 currentChild = 0;
-                return Status.SUCCESS;
+                return Status.FAILURE;
             }
 
-            return Status.SUCCESS;
+            return Status.RUNNING;
         }
     }
 }
