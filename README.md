@@ -2,7 +2,7 @@
 
 <h3> Marco Mota a44761</h3>
 
-Escolhidos os tutoriais na versão 2019.4
+Escolhidos os tutoriais da Parte1  na versão 2019.4 e da Parte2 na versão 2020.2
 
 
 <h3>Combinação escolhida para Parte 2: </h3>
