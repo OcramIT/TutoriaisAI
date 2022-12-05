@@ -12,6 +12,8 @@ namespace BT
         public int currentChild = 0;
         public string name;
 
+        
+
         public Node() { }
 
         public Node(string n)
