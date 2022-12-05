@@ -10,6 +10,7 @@ namespace BT {
         public GameObject diamond;
         public GameObject van;
         public GameObject backdoor;
+        public GameObject frontdoor;
         NavMeshAgent agent;
         public enum ActionState { IDLE, WORKING };
         ActionState state = ActionState.IDLE;
@@ -25,11 +26,16 @@ namespace BT {
             Sequence steal = new Sequence("Steal Something");
             Leaf goToDiamond = new Leaf("Go To Diamond",GoToDiamond);
             Leaf goToBackdoor = new Leaf("Go To Backdoor", GoToBackdoor);
+            Leaf goToFrontdoor = new Leaf("Go To Front", GoToFrontdoor);
             Leaf goToVan = new Leaf("Go To Van",GoToVan);
+            Selector opendoor = new Selector("Open Door");
 
-            steal.AddChild(goToBackdoor);
+            opendoor.AddChild(goToBackdoor);
+            opendoor.AddChild(goToFrontdoor);
+
+            steal.AddChild(opendoor);
             steal.AddChild(goToDiamond);
-            steal.AddChild(goToBackdoor);
+            //steal.AddChild(goToBackdoor);
             steal.AddChild(goToVan);
             tree.AddChild(steal);
 
@@ -48,6 +54,10 @@ namespace BT {
         public Node.Status GoToBackdoor()
         {
             return GoToLocation(backdoor.transform.position);
+        }
+        public Node.Status GoToFrontdoor()
+        {
+            return GoToLocation(frontdoor.transform.position);
         }
 
         Node.Status GoToLocation(Vector3 destination)
